@@ -1,35 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.tsx
+import React, { useState } from 'react';
+import AddStudent from "./components/addStudentComponent/AddStudent.tsx";
+import StudentsList from "./components/studentListComponent/StudentsList.tsx";
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+interface Student {
+    id: string;
+    name: string;
+    email: string;
 }
 
-export default App
+const App: React.FC = () => {
+    const [students, setStudents] = useState<Student[]>([]);
+
+    const addStudentToList = (newStudent: Student) => {
+        setStudents((prevStudents) => [...prevStudents, newStudent]);
+    };
+
+    return (
+        <div style={{ fontFamily: 'Arial, sans-serif', margin: '20px' }}>
+            <h1 style={{ textAlign: 'center', color: '#4CAF50' }}>Student Management</h1>
+            <AddStudent onAddStudent={addStudentToList} />
+            <StudentsList students={students} />
+        </div>
+    );
+};
+
+export default App;
