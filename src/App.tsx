@@ -1,28 +1,36 @@
-// src/App.tsx
-import React, { useState } from 'react';
-import AddStudent from "./components/addStudentComponent/AddStudent.tsx";
-import StudentsList from "./components/studentListComponent/StudentsList.tsx";
-
-interface Student {
-    id: string;
-    name: string;
-    email: string;
-}
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import StudentsPage from "./pages/studentPage/StudentPage.tsx";
+import CoursesPage from "./pages/cousesPage/CousesPage.tsx";
+import EnrollmentsPage from "./pages/enrollmentsPage/EnrollmentsPage.tsx";
+import {GlobalStyles} from "./styles/GlobalStyles.ts";
 
 const App: React.FC = () => {
-    const [students, setStudents] = useState<Student[]>([]);
-
-    const addStudentToList = (newStudent: Student) => {
-        setStudents((prevStudents) => [...prevStudents, newStudent]);
-    };
-
     return (
-        <div style={{ fontFamily: 'Arial, sans-serif', margin: '20px' }}>
-            <h1 style={{ textAlign: 'center', color: '#4CAF50' }}>Student Management</h1>
-            <AddStudent onAddStudent={addStudentToList} />
-            <StudentsList students={students} />
-        </div>
+        <Router>
+            <nav style={GlobalStyles.navbar}>
+                <ul style={GlobalStyles.navList}>
+                    <li style={GlobalStyles.navItem}>
+                        <Link to="/" style={GlobalStyles.navLink}>Alunos</Link>
+                    </li>
+                    <li style={GlobalStyles.navItem}>
+                        <Link to="/courses" style={GlobalStyles.navLink}>Cursos</Link>
+                    </li>
+                    <li style={GlobalStyles.navItem}>
+                        <Link to="/enrollments" style={GlobalStyles.navLink}>Matriculas</Link>
+                    </li>
+                </ul>
+            </nav>
+
+                <Routes>
+                    <Route path="/" element={<StudentsPage />} />
+                    <Route path="/courses" element={<CoursesPage />} />
+                    <Route path="/enrollments" element={<EnrollmentsPage />} />
+                </Routes>
+
+        </Router>
     );
 };
+
 
 export default App;
