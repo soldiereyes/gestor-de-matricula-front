@@ -26,10 +26,10 @@ const AddStudent: React.FC<AddStudentProps> = ({ onAddStudent }) => {
 
     return (
         <div style={AddStudentStyles.formContainer}>
-            <h2 style={AddStudentStyles.title}>Add Student</h2>
+            <h2 style={AddStudentStyles.title}>Cadastrar Aluno</h2>
             <form onSubmit={handleSubmit}>
                 <div style={AddStudentStyles.formGroup}>
-                    <label htmlFor="name" style={AddStudentStyles.label}>Name:</label>
+                    <label htmlFor="name" style={AddStudentStyles.label}>Nome:</label>
                     <input
                         id="name"
                         type="text"
@@ -51,7 +51,7 @@ const AddStudent: React.FC<AddStudentProps> = ({ onAddStudent }) => {
                     />
                 </div>
                 <button type="submit" style={AddStudentStyles.button}>
-                    Add
+                    Adicionar
                 </button>
             </form>
         </div>
